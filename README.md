@@ -1,10 +1,10 @@
-# YouTube Video Transcriber
+# Video Transcriber by AiCrafters
 
 A Streamlit app that transcribes YouTube videos using Whisper, with optional formatting using a large language model, audio download, and video download.
 
 ## How it works
 
-- Downloads audio from YouTube videos using `yt-dlp`.
+- Downloads audio from YouTube videos.
 - Splits audio into speech segments using Silero VAD.
 - Transcribes segments in batches using OpenAI's Whisper model.
 - Formats the transcription using a large language model (if selected).
@@ -31,4 +31,3 @@ Listed in `requirements.txt`
 ## License
 
 MIT
-"# YouTube-Transcriber" 
