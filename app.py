@@ -1,3 +1,12 @@
+import warnings
+# Suppress specific warnings (optional)
+warnings.filterwarnings("ignore", category=SyntaxWarning)
+warnings.filterwarnings("ignore", category=UserWarning)
+
+from pydub import AudioSegment
+# Explicitly set the path for ffmpeg on Streamlit Cloud
+AudioSegment.converter = "/usr/bin/ffmpeg"
+
 import uuid
 import streamlit as st
 import io
