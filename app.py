@@ -24,19 +24,19 @@ from litellm import completion
 LANGUAGES = ['english', 'chinese', 'german', 'spanish', 'russian', 'korean', 'french', 'japanese', 'portuguese', 'turkish', 'polish', 'catalan', 'dutch', 'arabic', 'swedish', 'italian', 'indonesian', 'hindi', 'finnish', 'vietnamese', 'hebrew', 'ukrainian', 'greek', 'malay', 'czech', 'romanian', 'danish', 'hungarian', 'tamil', 'norwegian', 'thai', 'urdu', 'croatian', 'bulgarian', 'lithuanian', 'latin', 'maori', 'malayalam', 'welsh', 'slovak', 'telugu', 'persian', 'latvian', 'bengali', 'serbian', 'azerbaijani', 'slovenian', 'kannada', 'estonian', 'macedonian', 'breton', 'basque', 'icelandic', 'armenian', 'nepali', 'mongolian', 'bosnian', 'kazakh', 'albanian', 'swahili', 'galician', 'marathi', 'punjabi', 'sinhala', 'khmer', 'shona', 'yoruba', 'somali', 'afrikaans', 'occitan', 'georgian', 'belarusian', 'tajik', 'sindhi', 'gujarati', 'amharic', 'yiddish', 'lao', 'uzbek', 'faroese', 'haitian creole', 'pashto', 'turkmen', 'nynorsk', 'maltese', 'sanskrit', 'luxembourgish', 'myanmar', 'tibetan', 'tagalog', 'malagasy', 'assamese', 'tatar', 'hawaiian', 'lingala', 'hausa', 'bashkir', 'javanese', 'sundanese', 'cantonese', 'burmese', 'valencian', 'flemish', 'haitian', 'letzeburgesch', 'pushto', 'panjabi', 'moldavian', 'moldovan', 'sinhalese', 'castilian', 'mandarin']
 
 # --- Model Loading and Caching ---
-@st.cache_resource
+
 def load_transcriber(_device):
     """Loads the Whisper transcription model."""
     transcriber = pipeline(model="openai/whisper-large-v3-turbo", device=_device)
     return transcriber
 
-@st.cache_resource
+
 def load_vad_model():
     """Loads the Silero VAD model."""
     return load_silero_vad()
 
 # --- Audio Processing Functions ---
-@st.cache_resource
+
 def download_and_convert_audio(video_url, audio_format="wav"):
     """Downloads and converts audio from a YouTube video.
 
@@ -93,7 +93,7 @@ def update_download_progress(d, status_message):
         else:
             status_message.text("Downloading...")
 
-@st.cache_data
+
 def split_audio_by_vad(audio_data: bytes, ext: str, _vad_model, sensitivity: float, max_duration: int = 30, return_seconds: bool = True):
     """Splits audio into chunks based on voice activity detection (VAD).
 
@@ -185,7 +185,7 @@ def split_audio_by_vad(audio_data: bytes, ext: str, _vad_model, sensitivity: flo
         if 'samples' in locals():
             del samples
 
-@st.cache_data
+
 def transcribe_batch(batch, _transcriber, language=None):
     """Transcribes a batch of audio chunks.
 
@@ -267,7 +267,7 @@ def setup_ui():
 
     return video_url, language, batch_size, transcribe_option, download_audio_option, download_video_option, process_button, vad_sensitivity, audio_format, video_format, format_option
 
-@st.cache_resource
+
 def initialize_models():
     """Initializes the transcription and VAD models."""
     device = "cuda" if torch.cuda.is_available() else "cpu"
